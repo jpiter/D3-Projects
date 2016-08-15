@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset = "utf-8">
+        <title>Metis HW</title>
+        <link rel="stylesheet" type="text/css" href="myfirst.css">
+        <script src="d3.min.js" charset= "utf-8"></script>
+    </head>
+
+    <body>
+    <h1>D3 Challenge</h1>
+    <h2>by Julia Piterbarg</h2>
+
+    <p>Challenge 1.</p>
+    <div id="area1"></div>
+    <p>Challenge 2.</p>
+    <div id="area2"></div>
+    <p>Challenge 3.</p>
+    <div id="area3"></div>
+    <p>Challenge 4.</p>
+    <div id="area4"></div>
+    <p> Challenge 5.</p>
+    <div id="area5"></div>
+
+
+    <script type = "text/javascript">
+
+
+
+
+        var dataset = [1, 2, 3, 4];
+
+        
+
+        var svg1 = d3.select("#area1").append("svg");
+       
+        height = 100
+        width = 600
+
+        svg1.attr("height", height).attr("width", width);
+
+        var cvet = d3.scale.category10()
+
+        circles1 = svg1.selectAll("circle")
+            .data(dataset)
+            .enter("circle")
+            .append("circle");
+        
+        circles1.attr("cx", function(d, i){return (i * 50) + 25;})
+            .data(dataset)
+            .attr("cy", height/2)
+            .attr("r", 10)
+            //.attr("fill", function(d) { return color_scale((d * 100) + 25); });
+            .attr("fill", function(d) { return cvet(d); });
+
+
+
+        
+        var svg2 = d3.select("#area2").append("svg");
+
+        height = 100
+        width = 600
+
+        svg2.attr("height", height).attr("width", width);
+
+        //var color_scale = d3.scale.linear().domain([0, width]).range(['beige', 'red']);
+
+        var cvet = d3.scale.category10()
+
+        circles2 = svg2.selectAll("circle")
+            .data(dataset)
+            .enter("circle")
+            .append("circle");
+        
+        circles2.attr("cx", function(d, i){return (i * 50) + 25;})
+            .data(dataset)
+            .attr("cy", function(d, i){return (i * 10) + height/2;})
+            .attr("r", 10)
+            //.attr("fill", function(d) { return color_scale((d * 100) + 25); });
+            .attr("fill", function(d) { return cvet(d); });
+
+
+
+
+        var svg3 = d3.select("#area3").append("svg");
+       
+        height = 100
+        width = 600
+
+        svg3.attr("height", height).attr("width", width);
+
+        var points = Array(10).fill().map((x,i)=>i)
+
+
+        circles3 = svg3.selectAll("circle")
+            .data(points)
+            .enter("circle")
+            .append("circle");
+        
+        circles3.attr("cx", function(d, i){return Math.random()*200 + 25;})
+            .data(points)
+            .attr("cy", function(d, i){return Math.random()*30 + 50;})
+            .attr("r", 5)
+            .attr("fill", function(d) { return cvet(d); });
+
+
+
+
+        var svg4 = d3.select("#area4").append("svg");
+
+        height = 100
+        width = 600
+
+        svg4.attr("height", height).attr("width", width);
+
+        rectangle = svg4.append("rect")
+            .attr("x", 5)
+            .attr("y", 25)
+            .attr("width", 140)
+            .attr("height", 50)
+            .attr("fill", "white")
+
+
+        var points = Array(3).fill().map((x,i)=>i)
+
+        circles4 = svg4.selectAll("circle")
+            .data(points)
+            .enter("circle")
+            .append("circle");
+        
+        circles4.attr("cx", function(d, i){return (i * 50) + 25;})
+            .data(points)
+            .attr("cy", function(d, i){return height/2;})
+            .attr("r", 10)
+            //.attr("fill", function(d) { return color_scale((d * 100) + 25); });
+            .attr("fill", function(d) { return cvet(d); });
+
+
+
+
+        var svg5 = d3.select("#area5").append("svg");
+        
+        height = 100
+        width = 600
+
+        svg5.attr("height", height).attr("width", width);
+
+
+        //The data for our line
+        var lineData = [ { "x": 10,   "y": 10},  { "x": 10,  "y": 90},
+                        { "x": 140,  "y": 10}, { "x": 10,   "y": 10}];
+
+        //This is the accessor function we talked about above
+        var lineFunction = d3.svg.line()
+                         .x(function(d) { return d.x; })
+                         .y(function(d) { return d.y; })
+                         .interpolate("linear");
+
+        //The line SVG Path we draw
+        var lineGraph = svg5.append("path")
+                        .attr("d", lineFunction(lineData))
+                        .attr("stroke", "blue")
+                        .attr("stroke-width", 2)
+                        .attr("fill", "yellow");
+
+
+    </script>
+    </body>
+</html>
